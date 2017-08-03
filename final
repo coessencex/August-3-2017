@@ -1,0 +1,60 @@
+    class Program
+    {
+        static void Main(string[] args)
+        {
+     
+        }
+        public static bool PalindromeChecker(int numbernew) //int because if double, decimal
+        {
+            var numdigits = numbernew.ToString().Length;
+            if (numdigits <= 1)
+            {
+                return true;
+            }
+            var a = Math.Pow(10, numdigits-1);      //1
+            var b = numbernew / a;          //separated var for  checking
+            var firstdig = Math.Floor(b);
+            var lastdig = numbernew % 10;
+            if (firstdig != lastdig)
+            {
+                return false;
+            }
+            else
+            {
+                int zxz = (int) (numbernew % a % 10);
+                return PalindromeChecker(zxz, zxz.ToString().Length);
+            }
+        }
+        public static bool PalindromeChecker(string word)
+        {
+            var wordlength = word.ToString().Length;
+            if (wordlength <= 1)
+            {
+                return true;
+            }
+            var indexforlastdig = word.Length - 1;
+            var firstdig = word.Substring(0,1);
+            var lastdig = word.Substring(indexforlastdig, 1);
+            if (firstdig != lastdig)
+            {
+                return false;
+            }
+            else
+            {
+                var hoy = word.Substring(1, wordlength-2);
+                return PalindromeChecker(hoy);
+            }
+        }
+
+        public static bool PalindromeChecker(int number2, int length)   //special case of LEADING ZEROES //double RECURSIVE ZALDY STYLE
+        {
+            if (number2.ToString().Length == length)
+            {
+                return PalindromeChecker(number2);
+            }
+            else
+            {
+                return true;    //if number is 060, number2 = 60(length 2), length is 3,
+            }
+        }
+    }
