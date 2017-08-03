@@ -1,0 +1,52 @@
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var j = PalindromeChecker("za");
+            Console.WriteLine(j);
+            Console.ReadLine();
+        }
+
+        public static bool PalindromeChecker(int numbernew) //int because if double, decimal
+        {
+            var numdigits = numbernew.ToString().Length;
+            if (numdigits <= 1)
+            {
+                return true;
+            }
+            var a = Math.Pow(10, numdigits-1);      //1
+            var b = numbernew / a;          //separated var for  checking
+            var firstdig = Math.Floor(b);
+            var lastdig = numbernew % 10;
+            if (firstdig != lastdig)
+            {
+                return false;
+            }
+            else
+            {
+                int zxz = (int) (numbernew % a / 10);
+                return PalindromeChecker(zxz);
+            }
+        }
+        public static bool PalindromeChecker(string word)
+        {
+            var wordlength = word.ToString().Length;
+            if (wordlength <= 1)
+            {
+                return true;
+            }
+            var indexforlastdig = word.Length - 1;
+            var firstdig = word.Substring(0,1);
+            var lastdig = word.Substring(indexforlastdig, 1);
+            if (firstdig != lastdig)
+            {
+                return false;
+            }
+            else
+            {
+                var recursiveword = word.Remove(wordlength - 1);
+                recursiveword = recursiveword.Remove(1);
+                return PalindromeChecker(recursiveword);
+            }
+        }
+    }
